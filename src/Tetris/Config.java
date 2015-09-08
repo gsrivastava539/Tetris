@@ -9,8 +9,10 @@ import javax.swing.JLabel;
 public class Config {
 
 	public static String rotate, left, right, down, pause;
+	private static ArrayList<Choice> choices;
 	
 	public static void openConfig(JFrame frame){
+		choices = new ArrayList<Choice>();
 		JFrame options = new JFrame("Options");
 		options.setSize(400, 300);
 		options.setResizable(false);
@@ -24,7 +26,13 @@ public class Config {
 		JLabel label = new JLabel();
 		label.setBounds(x, y-20, 100, 20);
 		Choice key = new Choice();
-		
+		for(String s: getKeyNames()){
+			key.add(s);
+		}
+		key.setBounds(x, y, 100, 20);
+		options.add(key);
+		options.add(label);
+		choices.add(key);
 	}
 	
 	public static ArrayList<String> getKeyNames(){
