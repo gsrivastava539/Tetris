@@ -7,15 +7,28 @@ import java.util.HashMap;
 
 public class KeyGetter {
 
-	private static HashMap<Integer, String> keys;
+	public static HashMap<String, Integer> keys;
 	
 	public static void loadkeys(){
-		keys = new HashMap<Integer, String>();
+		keys = new HashMap<String, Integer>();
 		Field[] fields = KeyEvent.class.getFields();
 		for(Field f: fields){
 			if(Modifier.isStatic(f.getModifiers())){
-				if(f.getName().startsWith("VK"));
-				System.out.println(f);
+				if(f.getName().startsWith("VK")){
+					try {
+						int num = f.getInt(null);
+						String name = KeyEvent.getKeyText(num);
+						keys.put(name, num);
+						System.out.println(name);
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
 			}
 		}
 	}

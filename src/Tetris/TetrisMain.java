@@ -26,7 +26,7 @@ public class TetrisMain extends Canvas implements Runnable, KeyListener {
 	public static final int WIDTH = 400, HEIGHT = 565;
 	
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Swati's Tetris Game");
+		final JFrame frame = new JFrame("Swati's Tetris Game");
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -62,7 +62,8 @@ public class TetrisMain extends Canvas implements Runnable, KeyListener {
 				alert.setSize(200, 150);
 				alert.setLayout(null);
 				alert.setLocationRelativeTo(null);
-				
+				alert.setAlwaysOnTop(true);
+								
 				JLabel score = new JLabel("The Highest Score is: " + highcore);
 				score.setBounds(0, 0, 200, 50);
 				JButton okayButton = new JButton("okay");
@@ -95,6 +96,16 @@ public class TetrisMain extends Canvas implements Runnable, KeyListener {
 		});
 		
 		
+		JMenuItem options = new JMenuItem("Options");
+		options.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Config.openConfig(frame);
+			}
+			
+		});
 		
 		TetrisMain tm = new TetrisMain();
 		tm.setBounds(0, 25, WIDTH, HEIGHT - 25);
@@ -103,6 +114,7 @@ public class TetrisMain extends Canvas implements Runnable, KeyListener {
 		frame.add(tm);
 		file.add(newGame);
 		file.add(highScore);
+		file.add(options);
 		file.add(exit);
 		frame.add(bar);
 		bar.add(file);
@@ -145,6 +157,7 @@ public class TetrisMain extends Canvas implements Runnable, KeyListener {
 		g.drawString("Max", 170, 100);
 	}
 
+	
 	public void init(){
 		
 	}
